@@ -42,8 +42,9 @@
   "description": "User configurable description",
   "license": "SEE LICENCE IN LICENCE",
   "main": "dist/index/main.js",
-  "name": "user-configurable-name-node-template",
+  "name": "@electricui/template-node-inner",
   "private": true,
+  "electricui": true,
   "migrations": [],
   "scripts": {
     "dev": "rollup -c",
