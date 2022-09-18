@@ -18,6 +18,7 @@
     "@electricui/transport-node-usb-discovery": "workspace:*",
     "@electricui/transport-node-websocket": "workspace:*",
     "@electricui/utility-crc16": "workspace:*",
+    "@electricui/script-utilities": "workspace:*",
     "debug": "^4.3.4",
     "serialport": "10.4.0",
     "ts-node": "^9.0.0",
