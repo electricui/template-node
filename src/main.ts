@@ -14,12 +14,8 @@ const configuration = new Configuration({
 })
 
 async function main() {
-  console.log(Object.keys(testCases))
-
   const forgettableNames = new Set([
-    LogMessageName.POLL,
-    LogMessageName.HINT_GENERATION,
-    LogMessageName.METADATA_INFO,
+    LogMessageName.TRANSIENT,
   ])
 
   const installReport = await StreamReport.start(
