@@ -49,7 +49,8 @@
   "electricui": true,
   "migrations": [],
   "scripts": {
-    "dev": "rollup -c",
+    "start": "rollup -c",
+    "setup": "yarn sdks",
     "build": "echo 'unimplemented, if building directly executable scripts is important to you, please let us know at support@electricui.com'"
   },
   "version": "0.1.0"
