@@ -26,10 +26,10 @@ export const blink = async (report: StreamReport) => {
 
   try {
     await report.startTimerPromise(
-      `Connecting to device...`,
+      'Connecting to device...',
       {
         wipeForgettableOnComplete: true,
-        singleLineOnComplete: `Connected to device`,
+        singleLineOnComplete: 'Connected to device',
       },
       async () => {
         // Find any device that's valid
@@ -50,7 +50,7 @@ export const blink = async (report: StreamReport) => {
     if (connectionCancellationToken.caused(err)) {
       report.reportError(
         LogMessageName.UNNAMED,
-        `Failed to connect in 2 seconds`,
+        'Failed to connect in 2 seconds',
       )
     }
     return
@@ -80,13 +80,13 @@ export const blink = async (report: StreamReport) => {
       // Pass a unique cancellation token outside of the normal context
       const nameCancellationToken = new CancellationToken().deadline(1000)
       try {
-        const name = await query(`name`, nameCancellationToken)
+        const name = await query('name', nameCancellationToken)
         report.reportInfo(LogMessageName.TRANSIENT, `name: ${name}`)
       } catch (err) {
         if (nameCancellationToken.caused(err)) {
           report.reportWarning(
             LogMessageName.UNNAMED,
-            `No name message found after 1 second`,
+            'No name message found after 1 second',
           )
         } else {
           // If a different error occurred, rethrow it
@@ -95,24 +95,24 @@ export const blink = async (report: StreamReport) => {
       }
 
       // Start a UI controlled sweep
-      await write(`led_blink`, 0)
-      await write(`lit_time`, 1000)
+      await write('led_blink', 0)
+      await write('lit_time', 1000)
 
       await report.startTimerPromise(
-        `LED Sweep`,
-        { wipeForgettableOnComplete: true, singleLineOnComplete: `LED Sweep` },
+        'LED Sweep',
+        { wipeForgettableOnComplete: true, singleLineOnComplete: 'LED Sweep' },
         async () => {
           for (let index = 0; index < 300; index += 10) {
             // Turn the LED on, wait a while
-            await write(`led_state`, 1)
+            await write('led_state', 1)
             await sleep(index / 2)
 
             // Turn it off again
-            await write(`led_state`, 0)
+            await write('led_state', 0)
             await sleep(index / 2)
 
             // Query some state
-            const queriedLedState = await query(`led_state`)
+            const queriedLedState = await query('led_state')
 
             // Log with the TRANSIENT message name, since wipeForgettableOnComplete is true, and TRANSIENT is marked as forgettable, it will be wiped in the logs on completion.
             report.reportInfo(
@@ -124,11 +124,11 @@ export const blink = async (report: StreamReport) => {
       )
 
       // Auto blink every 1 second
-      await write(`led_blink`, 1)
-      await write(`lit_time`, 1000)
+      await write('led_blink', 1)
+      await write('lit_time', 1000)
     } catch (err) {
       if (getCurrentCancellationToken().caused(err)) {
-        report.reportError(LogMessageName.UNNAMED, `Timed out...`)
+        report.reportError(LogMessageName.UNNAMED, 'Timed out...')
         return
       } else {
         throw err
@@ -138,5 +138,5 @@ export const blink = async (report: StreamReport) => {
     await disconnect()
   })
 
-  report.reportInfo(LogMessageName.UNNAMED, `Tests complete`)
+  report.reportInfo(LogMessageName.UNNAMED, 'Tests complete')
 }
