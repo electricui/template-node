@@ -20,7 +20,7 @@ export default {
 
     externals({
       packagePath: path.resolve(__dirname, 'package.json'),
-      //  exclude: /electricui/,
+      exclude: /electricui/,
     }),
 
     nodeResolve(),
